@@ -1,10 +1,15 @@
 module.exports = {
-  root: true,
-  extends: ["standard"],
-  globals: {
-    IS_DEVELOPMENT: "readonly",
-  },
-  parserOptions: {
-    ecmasVersion: 2020,
-  },
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module",
+    },
+    "rules": {
+    }
 };

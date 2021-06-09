@@ -1,0 +1,28 @@
+extends ../templates/homeTemplate
+
+block content 
+        .about 
+            .container 
+                    each media in body
+                        if media.slice_type=='catalouge'
+                            .about-catalogues 
+                                each item in media.items 
+                                    figure.catalogue 
+                                        img.catalogue__image(src=item.image.url alt=item.image.alt)
+                        if media.slice_type=='title'
+                            .about-title 
+                                h1.title=media.primary.title[0].text
+                        if media.slice_type=='content'
+                            section.about-content
+                                    .content 
+                                        h5.content-title=media.primary.content_title 
+                                        .content-description= media.primary.content_description 
+                                        figure.content-image
+                                            image.image(src=media.primary.content_image.url alt="content")
+                        if media.slice_type=='highlight'
+                            section.about-highlight 
+                                .highlight
+                                    h1.highlight-title=media.primary.highlight_title 
+                                    each item in media.items
+                                        .highlight-image 
+                                            img.image(src=item.highlight_image.url alt="highlight")

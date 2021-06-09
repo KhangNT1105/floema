@@ -4,14 +4,15 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const { DefinePlugin } = require("webpack");
 const { extendDefaultPlugins } = require("svgo");
 
 
 const sharedPath = path.join(__dirname, "shared");
-const appPath = path.join(__dirname, "app");
-const stylesPath = path.join(__dirname, "styles");
+const appPath = path.join(__dirname, "src/app");
+const stylesPath = path.join(__dirname, "src/styles");
 const nodePath = "node_modules";
 const IS_DEVELOPMENT = process.env.NODE_ENV === "dev";
 module.exports = {
@@ -20,6 +21,7 @@ module.exports = {
     modules: [appPath, sharedPath, stylesPath, nodePath],
   },
   plugins: [
+    new ESLintPlugin({}),
     new DefinePlugin({
       IS_DEVELOPMENT,
     }),
@@ -35,27 +37,6 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css",
     }),
-    // new ImageMinimizerPlugin({
-    //   minimizerOptions: {
-    //     // Lossless optimization with custom option
-    //     // Feel free to experiment with options for better result for you
-    //     plugins: [
-    //       ["gifsicle", { interlaced: true }],
-    //       ["jpegtran", { progressive: true }],
-    //       ["optipng", { optimizationLevel: 5 }],
-    //       [
-    //         "svgo",
-    //         {
-    //           plugins: [
-    //             {
-    //               removeViewBox: false,
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     ],
-    //   },
-    // }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
         // Lossless optimization with custom option
