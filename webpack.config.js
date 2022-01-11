@@ -4,11 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 const { DefinePlugin } = require("webpack");
 const { extendDefaultPlugins } = require("svgo");
-
 
 const sharedPath = path.join(__dirname, "shared");
 const appPath = path.join(__dirname, "src/app");
@@ -22,9 +21,11 @@ module.exports = {
   },
   plugins: [
     new ESLintPlugin({}),
+    // global variables
     new DefinePlugin({
       IS_DEVELOPMENT,
     }),
+    // copy folder
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -33,10 +34,12 @@ module.exports = {
         },
       ],
     }),
+    // bundle css
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
     }),
+    // minimize image
     new ImageMinimizerPlugin({
       minimizerOptions: {
         // Lossless optimization with custom option
@@ -81,7 +84,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "",
+              publicPath: "/public/path/to/",
             },
           },
           {
@@ -115,18 +118,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg|webp)$/i,
-        // use: [
-        //   {
-        //     loader: ImageMinimizerPlugin.loader,
-        //     options: {
-        //       severityError: "warning", // Ignore errors on corrupted images
-        //       minimizerOptions: {
-        //         plugins: ["gifsicle", "jpegtran", "optipng", "svgo"],
-        //       },
-        //     },
-        //   },
-        // ],
-        type:"asset"
+        type: "asset",
       },
       {
         test: /\.(glsl|frag|vert)$/,
@@ -147,5 +139,5 @@ module.exports = {
   performance: {
     maxEntrypointSize: 400000,
     maxAssetSize: 100000,
- }
+  },
 };

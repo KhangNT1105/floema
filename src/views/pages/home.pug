@@ -2,6 +2,17 @@ extends ../templates/homeTemplate
 
 block content 
     .home 
-        .container 
-            .home-title 
-                h1.title Home 
+        .home-wrapper 
+            .home-collections 
+                each collection,index in collections 
+                    .collection-title 
+                        h2.title=collection.title 
+                        span.subtitle=`${home.data.collection} ${Numbers(index)}`
+            .home-gallery 
+                each item in home.data.images 
+                    figure.gallery 
+                        img(src=item.image.url alt=item.image.alt)
+            .home-discovery 
+                a.discovery(href="/")=home.data.button 
+                 
+                

@@ -1,6 +1,21 @@
-$color-4: red;
-.khang {
-  .khang1 {
-    color: $color-4;
-  }
-}
+@import './abstracts/variables';
+@import './abstracts/mixins';
+@import './abstracts/functions';
+@import './abstracts/vendors';
+@import './abstracts/responsive';
+
+@import './base/reset';
+@import './base/base';
+@import './base/fonts';
+
+@import './layout/navigation';
+
+@import './components/preloader';
+
+@import './shared/titles.scss';
+@import './shared/descriptions.scss';
+
+@import './pages/home/home.scss';
+@import './pages/about/about.scss';
+@import './pages/collections/collections.scss';
+@import './pages/detail/detail.scss';

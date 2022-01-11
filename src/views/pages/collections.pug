@@ -2,7 +2,18 @@ extends ../templates/homeTemplate
 
 block content 
     .collections 
-        .container 
-            .collections-title 
-                h1.title Collections 
-                
+        .collections-wrapper 
+          .collections-products 
+            each collection,index in collections 
+                .collection-title 
+                    h2.title=collection.title 
+                    span.subtitle=`${home.data.collection} ${Numbers(index)}`
+            each collection in collections 
+                .collection-gallery
+                    each item in collection.products 
+                        figure.product-image 
+                            img(src=item.product.data.img1.url alt=item.product.data.img1.alt)   
+                .collection-content 
+                    .content 
+                        h1.content-title=`${collection.title } ${home.data.collection}`
+                        p.content-description=collection.description

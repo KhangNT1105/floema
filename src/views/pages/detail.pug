@@ -2,6 +2,29 @@ extends ../templates/homeTemplate
 
 block content 
     .detail 
-        .container 
-            .detail-title 
-                h1.title Detail
+        .detail-wrapper 
+            figure.detail-image
+                .detail-image__front 
+                    image.image(src=img1.url alt=img1.alt)
+                .detail-image__back 
+                    image.image(src=img2.url alt=img2.alt)
+            .detail-content 
+                .content 
+                    .content-collection 
+                        p.collection=collection.data.title + ' collection'
+                    .content-title 
+                        h1.title=title 
+                    .content-highlights 
+                        each highlight in highlights 
+                            .highlight
+                                .highlight-icon 
+                                    svg.icon
+                                        use(xlink:href=`sprite-${highlight.highlight_icon.toLowerCase()}`)
+
+                                .highlight-text=highlight.highlight_text 
+
+                    .content-information 
+                        each information in informations 
+                                .information
+                                    strong.information-label=information.information_label 
+                                    .information-description=information.information_description

@@ -2,18 +2,22 @@
     .navigation__wrapper
         .navigation-logo 
             a.navigation-logo__link(href="/")
-            | Floema
+                meta.data.title
             
         .navigation-menu 
             svg.navigation-menu__icon 
 
         ul.navigation-list 
-            li.navigation-item 
-                a.navigation-item__link(href="/") Home 
-            li.navigation-item 
-                a.navigation-item__link(href="/collections") Collections 
-            li.navigation-item 
-                a.navigation-item__link(href="/about") About 
-            li.navigation-item 
-                a.navigation-item__link(href="/detail") Detail
+            each item in navigation.data.links 
+                li.navigation-item  
+                    a.navigation-item__link(href=Link(item.link_content))=item.link_text
+          
+            //- li.navigation-item 
+            //-     a.navigation-item__link(href="/") Home 
+            //- li.navigation-item 
+            //-     a.navigation-item__link(href="/collections") Collections 
+            //- li.navigation-item 
+            //-     a.navigation-item__link(href="/about") About 
+            //- li.navigation-item 
+            //-     a.navigation-item__link(href="/detail") Detail
                 
